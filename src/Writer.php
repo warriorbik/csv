@@ -50,6 +50,32 @@ class Writer
         $this->handle = fopen($file, 'w+');
         return $this;
     }
+    /**
+    * Append to the csv file
+    */
+     public function append($file = 'php://memory', $delimiter = null, $enclosure = null, $escape = null)
+    {
+        if ($delimiter !== null) {
+            $this->delimiter = $delimiter;
+        } else {
+            $this->delimiter = config('csv.delimiter');
+        }
+
+        if ($enclosure !== null) {
+            $this->enclosure = $enclosure;
+        } else {
+            $this->enclosure = config('csv.enclosure');
+        }
+
+        if ($escape !== null) {
+            $this->escape = $escape;
+        } else {
+            $this->escape = config('csv.escape');
+        }
+
+        $this->handle = fopen($file, 'a+');
+        return $this;
+    }
 
     /**
      * Close file pointer
